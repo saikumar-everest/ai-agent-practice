@@ -1,0 +1,91 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wrappingIndent": "same",
+  "editor.wordWrapColumn": 150,
+  "prettier.configPath": "prettier.config.js",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "cSpell.words": [
+    "ACAT",
+    "AEDT",
+    "AEST",
+    "approuter",
+    "approvedhcp",
+    "atsi",
+    "Authorisation",
+    "authorise",
+    "BECS",
+    "beforedownload",
+    "Behaviour",
+    "bgcolor",
+    "buildpack",
+    "Cardless",
+    "Contri",
+    "cust",
+    "customerportal",
+    "Epoa",
+    "formik",
+    "Hana",
+    "homemadeservice",
+    "ICTS",
+    "insufficent",
+    "INVC",
+    "INVS",
+    "ITCF",
+    "mtaconfig",
+    "mtaext",
+    "mtar",
+    "multiapps",
+    "ONBOARDED",
+    "organisation",
+    "organisations",
+    "organise",
+    "Preboarding",
+    "Questionaire",
+    "Sharma",
+    "Specialised",
+    "summarises",
+    "tisnational",
+    "unspend",
+    "xero",
+    "xsuaa"
+  ],
+  "colorInfo.languages": [
+    {
+      "selector": "css",
+      "colors": "css"
+    },
+    {
+      "selector": "sass",
+      "colors": "css"
+    },
+    {
+      "selector": "scss",
+      "colors": "css"
+    },
+    {
+      "selector": "less",
+      "colors": "css"
+    },
+    {
+      "selector": "html",
+      "colors": "css"
+    },
+    {
+      "selector": "typescript",
+      "colors": "css"
+    }
+  ],
+
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "files.associations": {
+    "*.tsx": "typescriptreact"
+  }
+}

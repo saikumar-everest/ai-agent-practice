@@ -1,9 +1,11 @@
 {
-  "name": "ai",
+  "name": "ai-agent-railway",
   "version": "1.0.0",
-  "description": "Agent that finds available trains",
+  "description": "AI agent that finds available trains between two stations.",
   "main": "index.js",
   "scripts": {
+    "railway_agent": "python3 railway_agent_browser.py",
+    "best_agent": "python3 best_agent.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

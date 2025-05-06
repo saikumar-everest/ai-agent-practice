@@ -4,7 +4,7 @@
   "description": "This is to practice creating different AI agents that deals with tools.",
   "main": "index.js",
   "scripts": {
-    "railway_agent": "python3 railway_agent_browser.py",
+    "railway_agent": "python3 railway_agent.py",
     "simple_agent": "python3 simple_agent.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

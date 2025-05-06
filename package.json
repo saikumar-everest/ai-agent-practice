@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "railway_agent": "python3 railway_agent_browser.py",
-    "best_agent": "python3 best_agent.py",
+    "simple_agent": "python3 simple_agent.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

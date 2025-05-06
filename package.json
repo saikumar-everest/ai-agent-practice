@@ -1,7 +1,7 @@
 {
-  "name": "ai-agent-railway",
+  "name": "ai-agent-practice",
   "version": "1.0.0",
-  "description": "AI agent that finds available trains between two stations.",
+  "description": "This is to practice creating different AI agents that deals with tools.",
   "main": "index.js",
   "scripts": {
     "railway_agent": "python3 railway_agent_browser.py",

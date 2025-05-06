@@ -1,5 +1,6 @@
-from langchain_community.chat_models import ChatOpenAI
-from langchain.schema import HumanMessage
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import tool
+from langchain_core.messages import HumanMessage
 import os
 
 # Set OpenAI-compatible API to your local LM Studio instance
@@ -8,31 +9,35 @@ os.environ["OPENAI_API_KEY"] = "not-needed"  # Dummy key, LM Studio ignores it
 
 # Initialize the local LLM
 llm = ChatOpenAI(
-    model="microsoft_-_phi-2",  # You can give any name; LM Studio doesn't verify it
-    temperature=0,
+  model="deepseek coder v2-lite",  # You can give any name; LM Studio doesn't verify it
+  temperature=0,
 )
 
 # Example toolset
+@tool
 def weather_tool(location: str):
   """
-  Fetches weather information for a given location.
+  Fetches weather information for a given location as input. Ex, "New York".
   """
   return f"Fetching weather for {location}."
 
+@tool
 def math_tool(expression: str):
   """
-  Evaluates a mathematical expression.
+  Evaluates a mathematical expression which takes a mathematical expression as input. Ex, "2 + 2 * 3".
   """
   try:
     return eval(expression)
   except Exception as e:
     return f"Error: {e}"
 
+@tool
 def greeting_tool(name: str):
   """
-  Generates a greeting message.
+  Generates a greeting message which takes a person name as input. Ex, "Alice".
   """
   return f"Hello, {name}!"
+
 
 # Tool registry
 TOOLS = {
@@ -41,40 +46,34 @@ TOOLS = {
   "greeting_tool": greeting_tool
 }
 
-# LLM prompt builder
-def choose_tool_with_llm(user_input):
-  tool_descriptions = "\n".join([f"- {name}: {func.__doc__ or 'No description.'}" for name, func in TOOLS.items()])
-  prompt = f"""
-You are an AI agent. Based on the user's input, select the best tool.
+# Invoke the LLM with tools
+def invoke_llm_with_tools(user_query):
+  print(f'user_query: {user_query}')
 
-Available tools:
-{tool_descriptions}
+  messages = [HumanMessage(user_query)]
 
-User input: "{user_input}"
-Respond with the name of the best tool to use.
-IMPORTANT: Response should be a single line with the tool name only, no other text.
-"""
-  llm_with_tools = llm.bind_functions([weather_tool, math_tool, greeting_tool])
-  response = llm_with_tools.invoke(prompt)
-  return response.content.strip()
+  llm_with_tools = llm.bind_tools(TOOLS.values())
+  ai_message = llm_with_tools.invoke(messages)
 
-# Example runner
-def run_agent(user_input):
-  tool_name = choose_tool_with_llm(user_input)
-  print(f"Selected tool or response: {tool_name}")
-  # if tool_name in TOOLS:
-  #   # Here, you’d normally parse and extract arguments for the tool
-  #   # For simplicity, we'll hardcode or infer them
-  #   if tool_name == "weather_tool":
-  #     return TOOLS[tool_name]("New York")
-  #   elif tool_name == "math_tool":
-  #     return TOOLS[tool_name]("2 + 2 * 3")
-  #   elif tool_name == "greeting_tool":
-  #     return TOOLS[tool_name]("Alice")
-  # else:
-  #   return f"Tool '{tool_name}' not recognized."
+  print(f'tool_calls: {ai_message.tool_calls}')
+
+  messages.append(ai_message)
+
+  for tool_call in ai_message.tool_calls:
+    selected_tool = TOOLS[tool_call["name"].lower()]
+    tool_msg = selected_tool.invoke(tool_call)
+    messages.append(tool_msg)
+
+  ai_response = llm_with_tools.invoke(messages)
+
+  return ai_response.content.strip()
+
+# AI agent runner
+def run_agent(user_query):
+  ai_response_using_tools = invoke_llm_with_tools(user_query)
+  print(f"\nAnswer: {ai_response_using_tools}")
 
 # Test it
-# print(run_agent("What’s the weather in NYC?"))
-print(run_agent("Say hi to John"))
-# print(run_agent("What is 10 + 20?"))
+# run_agent("What’s the weather in Delhi?")
+# run_agent("Say hi to Saikumar")
+run_agent("What is 3 + 5 * 7 ?")

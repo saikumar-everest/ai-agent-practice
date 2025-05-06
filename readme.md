@@ -10,7 +10,7 @@ python3 <agent_python_script_file.py> # python3 simple_agent.py or npm run simpl
 
 ### LLM
 
-Used [LM Studio](https://lmstudio.ai/) to run [Deepseek coder v2-lite LLM](https://lmstudio.ai/model/deepseek-coder-v2-lite-instruct) locally.
+Use [LM Studio](https://lmstudio.ai/) to run any model locally. I've used [Deepseek coder v2-lite](https://lmstudio.ai/model/deepseek-coder-v2-lite-instruct) model.
 
 _Suggestion: Never use bad or low quality llms._
 

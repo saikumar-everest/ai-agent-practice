@@ -19,3 +19,19 @@ _Suggestion: Never use bad or low quality llms._
 1. Install python
 2. Install npm
 3. Run LLM locally in LM Studio
+
+### Available agents
+
+#### simple_agent
+
+It's an LLM agent that can cater user queries related to 3 different things.
+
+1. weather info
+2. mathematical expression evaluation
+3. greet a person
+
+If any user query comes that's not related to above available tools, then LLM is expected to respond with `I don't know`.
+
+#### railway_agent
+
+WIP
